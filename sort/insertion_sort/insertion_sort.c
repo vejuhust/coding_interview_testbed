@@ -10,6 +10,16 @@
 long data [MAXLEN];
 int  length = 0;
 
+void insertion_sort(long * data, int len_data) {
+    for (int i = 1; i < len_data; i++) {
+        for (int j = i; j > 0 && data[j - 1] > data[j]; j--)  {
+            long tmp = data[j];
+            data[j] = data[j - 1];
+            data[j - 1] = tmp;
+        }
+    }
+}
+
 void selection_sort(long * data, int len_data) {
     for (int i = 0; i < len_data; i++) {
         int  min = i;
@@ -61,7 +71,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        selection_sort(data, length);
+        insertion_sort(data, length);
         if (0 == data_output("output.txt")) {
             return 0;
         }
