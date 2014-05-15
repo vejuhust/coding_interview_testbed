@@ -10,10 +10,37 @@
 long data [MAXLEN];
 int  length = 0;
 
-int compare_long(const void * a, const void * b) {
-    long * x = (long *) a;
-    long * y = (long *) b;
-    return *x - *y;
+void counting_sort(long * data, int len_data) {
+    if (len_data <= 1) {
+        return;
+    }
+    
+    long low = LONG_MAX;
+    long high = LONG_MIN;
+    for (int i = 0; i < len_data; i++) {
+        low = data[i] < low ? data[i] : low;
+        high = data[i] > high ? data[i] : high;
+    }
+    
+    int len_count = high - low + 1;
+    int * count = (int *) calloc(len_count, sizeof(int));
+    for (int i = 0; i < len_data; i++) {
+        count[data[i] - low]++;
+    }
+    for (int i = 1; i < len_count; i++) {
+        count[i] += count[i - 1];
+    }
+    
+    long * tmp = (long *) calloc(len_data, sizeof(long));
+    for (int i = len_data - 1; i >=0; i--) {
+        tmp[--count[data[i] - low]] = data[i];
+    }
+    for (int i = 0; i < len_data; i++) {
+        data[i] = tmp[i];
+    }
+    
+    free(count);
+    free(tmp);
 }
 
 int data_input(char * filename) {
@@ -54,7 +81,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        qsort(data, length, sizeof(long), compare_long);
+        counting_sort(data, length);
         if (0 == data_output("output.txt")) {
             return 0;
         }
