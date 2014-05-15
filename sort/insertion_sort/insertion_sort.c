@@ -12,18 +12,14 @@ int  length = 0;
 
 void selection_sort(long * data, int len_data) {
     for (int i = 0; i < len_data; i++) {
-        int  pos_min = i;
-        long value_min = data[pos_min];
+        int  min = i;
         for (int j = i + 1; j < len_data; j++)  {
-            if (data[j] < value_min) {
-                pos_min = j;
-                value_min = data[pos_min];
-            }
+            min = data[j] < data[min] ? j : min;
         }
         
         long tmp = data[i];
-        data[i] = data[pos_min];
-        data[pos_min] = tmp;
+        data[i] = data[min];
+        data[min] = tmp;
     }
 }
 
