@@ -10,10 +10,21 @@
 long data [MAXLEN];
 int  length = 0;
 
-int compare_long(const void * a, const void * b) {
-    long * x = (long *) a;
-    long * y = (long *) b;
-    return *x - *y;
+void selection_sort(long * data, int len_data) {
+    for (int i = 0; i < len_data; i++) {
+        int  pos_min = i;
+        long value_min = data[pos_min];
+        for (int j = i + 1; j < len_data; j++)  {
+            if (data[j] < value_min) {
+                pos_min = j;
+                value_min = data[pos_min];
+            }
+        }
+        
+        long tmp = data[i];
+        data[i] = data[pos_min];
+        data[pos_min] = tmp;
+    }
 }
 
 int data_input(char * filename) {
@@ -54,7 +65,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        qsort(data, length, sizeof(long), compare_long);
+        selection_sort(data, length);
         if (0 == data_output("output.txt")) {
             return 0;
         }
