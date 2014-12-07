@@ -16,24 +16,43 @@ color_blue='\033[0;34m'
 color_green='\033[0;32m'
 color_yellow='\033[1;33m'
 
+function colorize_output() {
+    echo -e "${1}${2}${color_none}"
+}
+
 function print_log() {
     content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
-    echo -e "${color_yellow}${content}${color_none}"
+    colorize_output "$color_yellow" "$content" 
 }
 
 function print_warn() {
     content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
-    echo -e "${color_red}${content}${color_none}"
+    colorize_output "$color_red" "$content"
 }
 
 function print_ok() {
     content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
-    echo -e "${color_green}${content}${color_none}"
+    colorize_output "$color_green" "$content"
 }
 
 function print_info() {
     content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
-    echo -e "${color_blue}${content}${color_none}"
+    colorize_output "$color_blue" "$content"
+}
+
+function test_and_diff() {
+    input=$1
+    output=$2
+    print_info "input file content - '${input}'"
+    colorize_output "$color_blue" "$(cat "$input" | head -10)"
+    print_info "output file content - '${output}'"
+    colorize_output "$color_blue" "$(cat "$output" | head -10)"
+}
+
+function test_only() {
+    input=$1
+    print_info "input file content - '${input}'"
+    colorize_output "$color_blue" "$(cat "$input" | head -10)"
 }
 
 
@@ -72,8 +91,21 @@ time ${COMPILER} *.c -Wall -Wextra -o "$fileexe"
 if [ -e "$fileexe" ];
 then
     print_ok "file '${fileexe}' was built successfully"
-    
-    # doing something
+    count=0
+    for filein in $(find "$dirin" -iname "*.txt" | sort) 
+    do
+        count=`expr $count + 1`
+        tmpout=${filein##*/}
+        fileout=${dirout}${tmpout//input/output}
+        if [ -e "$fileout" ];
+        then
+            print_log "test case: ${count} - with full data:"
+            test_and_diff "$filein" "$fileout"
+        else
+            print_log "test case: ${count} - without output data."
+            test_only "$filein"
+        fi
+    done
 else
     print_warn "build failure"
 fi
