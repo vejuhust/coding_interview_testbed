@@ -11,7 +11,7 @@ alias ll='ls -lhA'
 export TPATH=/var/lib/cloud9/technical_interview_questions/
 
 function mcd() {
-    mkdir -p "$1" && cd "$1";
+    mkdir -p "$1" && cd "$1" && touch "${1##*/}.c"
 }
 
 function tcd() {
