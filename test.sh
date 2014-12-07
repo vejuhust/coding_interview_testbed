@@ -5,7 +5,6 @@ TZ='Asia/Shanghai'; export TZ
 COMPILER=gcc
 
 limitdata=5
-keyword="${1// }"
 dirtest="/tmp/test-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)/"
 dirin="$dirtest"input/
 dirout="$dirtest"output/
@@ -52,8 +51,8 @@ function print_info() {
 }
 
 function test_and_diff() {
-    input=$1
-    output=$2
+    input="$1"
+    output="$2"
     print_info "input file content - '${input}'"
     colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
     print_info "output file content - '${output}'"
@@ -80,7 +79,7 @@ function test_and_diff() {
 }
 
 function test_only() {
-    input=$1
+    input="$1"
     if [ -e "$input" ];
     then
         print_info "input file content - '${input}'"
@@ -113,6 +112,7 @@ function test_only() {
 
 cd "$TPATH"
 
+keyword="${1// }"
 if [ -z "$keyword" ];
 then
     print_warn "keyword should not be empty!"
