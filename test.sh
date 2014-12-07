@@ -3,6 +3,7 @@
 TZ='Asia/Shanghai'; export TZ
 
 compiler=gcc
+time_count=time
 
 verbose=
 limitdata=5
@@ -60,7 +61,7 @@ function test_and_diff() {
     colorize_output "$color_blue" "$(cat "$output" | head -${limitdata})"
     cp -f"$verbose" "$input" "$filetmpin"
     print_log "execute '${fileexe}' with '${input}'"
-    time "$fileexe"
+    eval "$time_count" "$fileexe"
     if [ 0 -eq "$?" ];
     then
         print_ok "execution success"
@@ -90,7 +91,7 @@ function test_only() {
     else
         print_log "execute '${fileexe}' without input file"
     fi
-    result=$(time "$fileexe")
+    result=$(eval "$time_count" "$fileexe")
     if [ 0 -eq "$?" ];
     then
         print_ok "execution && test (tentative) success"
@@ -142,7 +143,7 @@ cp -f"$verbose" output*.txt "$dirout"
 
 cd "$dirtest"
 print_log "compile source codes"
-time ${compiler} *.c -Wall -Wextra -o "$fileexe"
+eval "$time_count" "$compiler" *.c -Wall -Wextra -o "$fileexe"
 
 if [ -e "$fileexe" ];
 then
