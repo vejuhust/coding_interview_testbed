@@ -76,12 +76,27 @@ function test_and_diff() {
     else
         print_warn "execution failure"
     fi
+    rm -fv "$filetmpin" "$filetmpout"
 }
 
 function test_only() {
     input=$1
     print_info "input file content - '${input}'"
     colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
+    cp -vf "$input" "$filetmpin"
+    print_log "execute '${fileexe}' with '${input}'"
+    result=$(time "$fileexe")
+    if [ 0 -eq "$?" ];
+    then
+        print_ok "execution && test (tentative) success"
+        count_ok=`expr $count_ok + 1`
+        print_info "execution result - '${filetmpout}'"
+        colorize_output "$color_blue" "$(cat "$filetmpout" | head -${limitdata})"
+    else
+        print_warn "execution || test failure"
+        colorize_output "$color_red" "$result"
+    fi
+    rm -fv "$filetmpin" "$filetmpout"
 }
 
 
