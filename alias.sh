@@ -13,8 +13,10 @@ function tcd() {
         if [ -z "$dirdest" ];
         then
             printf "%s not found!\n" "$keyword"
+            return 1
         else
             cd "$dirdest"
+            return 0
         fi
     fi
 }
@@ -26,5 +28,6 @@ function tpush() {
     git commit -m "${1:-little change}"
     git push -u origin master
 }
+
 
 #cat alias.sh >> ~/.bash_aliases
