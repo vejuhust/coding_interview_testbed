@@ -16,12 +16,17 @@ color_blue='\033[0;34m'
 color_green='\033[0;32m'
 color_yellow='\033[1;33m'
 
+function update_date() {
+    strdate="$(date '+%T:%N')"
+}
+
 function colorize_output() {
     echo -e "${1}${2}${color_none}"
 }
 
 function print_log() {
-    content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
+    update_date
+    content=$(printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_yellow" "$content" 
 }
 
