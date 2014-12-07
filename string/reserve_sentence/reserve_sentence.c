@@ -1,11 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-long long num_a;
-long long num_b;
-long long result;
+char * str_src;
+char * str_dest;
 
-long long plus(long long a, long long b) {
-    return a + b;
+#define MAXLEN 65535
+
+char * reserve_sentence(char * ss) {
+    return ss;
 }
 
 int data_input(char * filename) {
@@ -15,7 +17,8 @@ int data_input(char * filename) {
         return 1;
     }
     else {
-        fscanf(fp, "%lld%lld", &num_a, &num_b);
+        str_src = (char *) malloc(MAXLEN * sizeof(char));
+        fscanf(fp, "%*s%65535[^\"]", str_src);
         fclose(fp);
     }
     return 0;
@@ -28,7 +31,8 @@ int data_output(char * filename) {
         return 1;
     }
     else {
-        fprintf(fp, "%lld", result);
+        fprintf(fp, "%d\n", strlen(str_dest));
+        fprintf(fp, "\"%s\"", str_dest);
         fclose(fp);
     }
     return 0;
@@ -36,7 +40,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        result = plus(num_a, num_b);
+        str_dest = reserve_sentence(str_src);
         if (0 == data_output("output.txt")) {
             return 0;
         }
