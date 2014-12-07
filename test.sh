@@ -17,7 +17,8 @@ color_green='\033[0;32m'
 color_yellow='\033[1;33m'
 
 function update_date() {
-    strdate="$(date '+%T:%N')"
+    strtmp="$(date '+%T:%N')"
+    strdate="${strtmp:0:12}"
 }
 
 function colorize_output() {
@@ -31,17 +32,20 @@ function print_log() {
 }
 
 function print_warn() {
-    content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
+    update_date
+    content=$(printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_red" "$content"
 }
 
 function print_ok() {
-    content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
+    update_date
+    content=$(printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_green" "$content"
 }
 
 function print_info() {
-    content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
+    update_date
+    content=$(printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_blue" "$content"
 }
 
@@ -100,8 +104,8 @@ then
     for filein in $(find "$dirin" -iname "*.txt" | sort) 
     do
         count=`expr $count + 1`
-        tmpout=${filein##*/}
-        fileout=${dirout}${tmpout//input/output}
+        strtmp="${filein##*/}"
+        fileout="${dirout}${strtmp//input/output}"
         if [ -e "$fileout" ];
         then
             print_log "test case: ${count} - with full data:"
