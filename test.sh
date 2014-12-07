@@ -11,7 +11,7 @@ then
     exit 1
 fi
 
-dirdest=$(find . -iname "*$keyword*" | head -1)
+dirdest=$(find . -iname "*$keyword*" -not -path "./.git/*" | head -1)
 if [ -z "$dirdest" ];
 then
     printf "project '%s' not found!\n" "$keyword"

@@ -19,7 +19,7 @@ function tcd() {
     keyword="${1// }"
     if [ ! -z "$keyword" ]; 
     then
-        dirdest=$(find . -iname "*$keyword*" | head -1)
+        dirdest=$(find . -iname "*$keyword*" -not -path "./.git/*" | head -1)
         if [ -z "$dirdest" ];
         then
             printf "%s not found!\n" "$keyword"
