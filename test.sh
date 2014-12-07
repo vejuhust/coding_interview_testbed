@@ -4,11 +4,14 @@ TZ='Asia/Shanghai'; export TZ
 
 COMPILER=gcc
 
+limitdata=5
 keyword="${1// }"
 dirtest="/tmp/test-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)/"
 dirin="$dirtest"input/
 dirout="$dirtest"output/
 fileexe="$dirtest"a.out
+filetmpin="$dirtest"input.txt
+filetmpout="$dirtest"output.txt
 
 color_none='\033[0m'
 color_red='\033[0;31m'
@@ -49,15 +52,32 @@ function test_and_diff() {
     input=$1
     output=$2
     print_info "input file content - '${input}'"
-    colorize_output "$color_blue" "$(cat "$input" | head -10)"
+    colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
     print_info "output file content - '${output}'"
-    colorize_output "$color_blue" "$(cat "$output" | head -10)"
+    colorize_output "$color_blue" "$(cat "$output" | head -${limitdata})"
+    cp -vf "$input" "$filetmpin"
+    print_log "execute '${fileexe}' with '${input}'"
+    time "$fileexe"
+    if [ 0 -eq "$?" ];
+    then
+        print_ok "execution success"
+        result=$(diff -sb "$output" "$filetmpout")
+        if [ 0 -eq "$?" ];
+        then
+            print_ok "test success"
+        else
+            print_warn "test failure"
+            colorize_output "$color_red" "$result"
+        fi
+    else
+        print_warn "execution failure"
+    fi
 }
 
 function test_only() {
     input=$1
     print_info "input file content - '${input}'"
-    colorize_output "$color_blue" "$(cat "$input" | head -10)"
+    colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
 }
 
 
