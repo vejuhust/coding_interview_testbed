@@ -1,15 +1,25 @@
 
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
+
 alias ls='ls --color=tty --classify $*'
 alias ll='ls -lhA'
 
 export TPATH=/var/lib/cloud9/technical_interview_questions/
+
+function mcd() {
+    mkdir -p "$1" && cd "$1";
+}
 
 function tcd() {
     cd $TPATH
     keyword="${1// }"
     if [ ! -z "$keyword" ]; 
     then
-        dirdest=$(find . -iname *"$keyword"* | head -1)
+        dirdest=$(find . -iname "*$keyword*" | head -1)
         if [ -z "$dirdest" ];
         then
             printf "%s not found!\n" "$keyword"
@@ -30,4 +40,4 @@ function tpush() {
 }
 
 
-#cat alias.sh >> ~/.bash_aliases
+#cat alias.sh > ~/.bash_aliases
