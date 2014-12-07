@@ -81,17 +81,28 @@ function test_and_diff() {
 
 function test_only() {
     input=$1
-    print_info "input file content - '${input}'"
-    colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
-    cp -vf "$input" "$filetmpin"
-    print_log "execute '${fileexe}' with '${input}'"
+    if [ -e "$input" ];
+    then
+        print_info "input file content - '${input}'"
+        colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
+        cp -vf "$input" "$filetmpin"
+        print_log "execute '${fileexe}' with '${input}'"
+    else
+        print_log "execute '${fileexe}' without input file"
+    fi
     result=$(time "$fileexe")
     if [ 0 -eq "$?" ];
     then
         print_ok "execution && test (tentative) success"
         count_ok=`expr $count_ok + 1`
-        print_info "execution result - '${filetmpout}'"
-        colorize_output "$color_blue" "$(cat "$filetmpout" | head -${limitdata})"
+        if [ -e "$filetmpout" ];
+        then
+            print_info "execution result file - '${filetmpout}'"
+            colorize_output "$color_blue" "$(cat "$filetmpout" | head -${limitdata})"
+        else
+            print_info "execution result stdout"
+            colorize_output "$color_blue" "$result"
+        fi
     else
         print_warn "execution || test failure"
         colorize_output "$color_red" "$result"
@@ -149,6 +160,12 @@ then
             test_only "$filein"
         fi
     done
+    if [ 0 -eq "$count_all" ];
+    then
+        count_all=1
+        print_log "test case: ${count_all} - without input/output data."
+        test_only
+    fi
 else
     print_warn "build failure"
 fi
