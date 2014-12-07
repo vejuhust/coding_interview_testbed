@@ -8,7 +8,7 @@ keyword="${1// }"
 dirtest="/tmp/test-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)/"
 dirin="$dirtest"input/
 dirout="$dirtest"output/
-fileexe=a.out
+fileexe="$dirtest"a.out
 
 color_none='\033[0m'
 color_red='\033[0;31m'
@@ -26,26 +26,22 @@ function colorize_output() {
 }
 
 function print_log() {
-    update_date
-    content=$(printf "[%s] %s" "$strdate" "$*")
+    content=$(update_date && printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_yellow" "$content" 
 }
 
 function print_warn() {
-    update_date
-    content=$(printf "[%s] %s" "$strdate" "$*")
+    content=$(update_date && printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_red" "$content"
 }
 
 function print_ok() {
-    update_date
-    content=$(printf "[%s] %s" "$strdate" "$*")
+    content=$(update_date && printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_green" "$content"
 }
 
 function print_info() {
-    update_date
-    content=$(printf "[%s] %s" "$strdate" "$*")
+    content=$(update_date && printf "[%s] %s" "$strdate" "$*")
     colorize_output "$color_blue" "$content"
 }
 
