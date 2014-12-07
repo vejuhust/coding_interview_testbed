@@ -13,6 +13,9 @@ fileexe="$dirtest"a.out
 filetmpin="$dirtest"input.txt
 filetmpout="$dirtest"output.txt
 
+count_all=0
+count_ok=0
+
 color_none='\033[0m'
 color_red='\033[0;31m'
 color_blue='\033[0;34m'
@@ -65,6 +68,7 @@ function test_and_diff() {
         if [ 0 -eq "$?" ];
         then
             print_ok "test success"
+            count_ok=`expr $count_ok + 1`
         else
             print_warn "test failure"
             colorize_output "$color_red" "$result"
@@ -116,18 +120,17 @@ time ${COMPILER} *.c -Wall -Wextra -o "$fileexe"
 if [ -e "$fileexe" ];
 then
     print_ok "file '${fileexe}' was built successfully"
-    count=0
     for filein in $(find "$dirin" -iname "*.txt" | sort) 
     do
-        count=`expr $count + 1`
+        count_all=`expr $count_all + 1`
         strtmp="${filein##*/}"
         fileout="${dirout}${strtmp//input/output}"
         if [ -e "$fileout" ];
         then
-            print_log "test case: ${count} - with full data:"
+            print_log "test case: ${count_all} - with full data:"
             test_and_diff "$filein" "$fileout"
         else
-            print_log "test case: ${count} - without output data."
+            print_log "test case: ${count_all} - without output data."
             test_only "$filein"
         fi
     done
@@ -137,5 +140,13 @@ fi
 
 print_log "clean up tmp files"
 rm -vfr "$dirtest"
+
+if [ "$count_ok" -eq "$count_all" ];
+then
+    print_ok "all ${count_all} test(s) passed!"
+else
+    count_fail=`expr $count_all - $count_ok`
+    print_warn "only ${count_ok} out of ${count_all} test(s) passed, ${count_fail} failed! take your time."
+fi
 
 print_log "project '${nameprj}' - test ends"
