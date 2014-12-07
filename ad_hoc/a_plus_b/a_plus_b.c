@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-long num_a;
-long num_b;
-long result;
+long long num_a;
+long long num_b;
+long long result;
 
-long plus(long a, long b) {
+long long plus(long long a, long long b) {
     return a + b;
 }
 
@@ -15,7 +15,7 @@ int data_input(char * filename) {
         return 1;
     }
     else {
-        fscanf(fp, "%ld%ld", &num_a, &num_b);
+        fscanf(fp, "%lld%lld", &num_a, &num_b);
         fclose(fp);
     }
     return 0;
@@ -28,7 +28,7 @@ int data_output(char * filename) {
         return 1;
     }
     else {
-        fprintf(fp, "%ld", result);
+        fprintf(fp, "%lld", result);
         fclose(fp);
     }
     return 0;
