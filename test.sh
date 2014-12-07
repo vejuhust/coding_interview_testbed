@@ -2,8 +2,9 @@
 
 TZ='Asia/Shanghai'; export TZ
 
-COMPILER=gcc
+compiler=gcc
 
+verbose=v
 limitdata=5
 dirtest="/tmp/test-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)/"
 dirin="$dirtest"input/
@@ -57,7 +58,7 @@ function test_and_diff() {
     colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
     print_info "output file content - '${output}'"
     colorize_output "$color_blue" "$(cat "$output" | head -${limitdata})"
-    cp -vf "$input" "$filetmpin"
+    cp -f"$verbose" "$input" "$filetmpin"
     print_log "execute '${fileexe}' with '${input}'"
     time "$fileexe"
     if [ 0 -eq "$?" ];
@@ -75,7 +76,7 @@ function test_and_diff() {
     else
         print_warn "execution failure"
     fi
-    rm -fv "$filetmpin" "$filetmpout"
+    rm -f"$verbose" "$filetmpin" "$filetmpout"
 }
 
 function test_only() {
@@ -84,7 +85,7 @@ function test_only() {
     then
         print_info "input file content - '${input}'"
         colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
-        cp -vf "$input" "$filetmpin"
+        cp -f"$verbose" "$input" "$filetmpin"
         print_log "execute '${fileexe}' with '${input}'"
     else
         print_log "execute '${fileexe}' without input file"
@@ -106,7 +107,7 @@ function test_only() {
         print_warn "execution || test failure"
         colorize_output "$color_red" "$result"
     fi
-    rm -fv "$filetmpin" "$filetmpout"
+    rm -f"$verbose" "$filetmpin" "$filetmpout"
 }
 
 
@@ -130,18 +131,18 @@ cd "$dirsrc"
 nameprj="${dirsrc##*/}"
 print_log "project '${nameprj}' - test starts"
 
-mkdir -vp "$dirtest"
-mkdir -vp "$dirin"
-mkdir -vp "$dirout"
+mkdir -p"$verbose" "$dirtest"
+mkdir -p"$verbose" "$dirin"
+mkdir -p"$verbose" "$dirout"
 
 print_log "copy source codes and test cases"
-cp -v *.c "$dirtest"
-cp -v input*.txt "$dirin"
-cp -v output*.txt "$dirout"
+cp -f"$verbose" *.c "$dirtest"
+cp -f"$verbose" input*.txt "$dirin"
+cp -f"$verbose" output*.txt "$dirout"
 
 cd "$dirtest"
 print_log "compile source codes"
-time ${COMPILER} *.c -Wall -Wextra -o "$fileexe"
+time ${compiler} *.c -Wall -Wextra -o "$fileexe"
 
 if [ -e "$fileexe" ];
 then
@@ -171,7 +172,7 @@ else
 fi
 
 print_log "clean up tmp files"
-rm -vfr "$dirtest"
+rm -rf"$verbose" "$dirtest"
 
 if [ "$count_ok" -eq "$count_all" ];
 then
