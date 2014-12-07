@@ -1,17 +1,30 @@
 
 alias ls='ls --color=tty --classify $*'
 alias ll='ls -lhA'
-alias root='cd /var/lib/cloud9/technical_interview_questions/'
+
+export TPATH=/var/lib/cloud9/technical_interview_questions/
 
 function tcd() {
-    cd $(find . -iname *"$1"* | head -1)
+    cd $TPATH
+    keyword="${1// }"
+    if [ ! -z "$keyword" ]; 
+    then
+        dirdest=$(find . -iname *"$keyword"* | head -1)
+        if [ -z "$dirdest" ];
+        then
+            printf "%s not found!\n" "$keyword"
+        else
+            cd "$dirdest"
+        fi
+    fi
 }
 
 function tpush() {
+    cd $TPATH
     git status
     git add -A
     git commit -m "${1:-little change}"
     git push -u origin master
 }
 
-#cat alias.sh >> ~/.bash_aliases 
+#cat alias.sh >> ~/.bash_aliases
