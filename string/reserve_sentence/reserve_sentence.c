@@ -18,10 +18,17 @@ int data_input(char * filename) {
     }
     else {
         str_src = (char *) malloc(MAXLEN * sizeof(char));
-        fscanf(fp, "%*s%65535[^\"]", str_src);
-        fclose(fp);
+        if (NULL != fgets(str_src, MAXLEN, fp)) {
+            int len = strlen(str_src);
+            if (len >= 2) {
+                *(str_src + (len - 1) * sizeof(char)) = '\0';
+                str_src += sizeof(char);
+                fclose(fp);
+                return 0;
+            }
+        }
     }
-    return 0;
+    return 2;
 }
 
 int data_output(char * filename) {
