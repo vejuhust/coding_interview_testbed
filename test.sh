@@ -8,6 +8,7 @@ keyword="${1// }"
 dirtest="/tmp/test-$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)"
 dirin="$dirtest"/input/
 dirout="$dirtest"/output/
+fileexe=a.out
 
 color_none='\033[0m'
 color_red='\033[0;31m'
@@ -23,6 +24,16 @@ function print_log() {
 function print_warn() {
     content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
     echo -e "${color_red}${content}${color_none}"
+}
+
+function print_ok() {
+    content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
+    echo -e "${color_green}${content}${color_none}"
+}
+
+function print_info() {
+    content=$(printf "[%s] %s" "$(date '+%T:%N')" "$*")
+    echo -e "${color_blue}${content}${color_none}"
 }
 
 
@@ -49,10 +60,23 @@ mkdir -vp "$dirtest"
 mkdir -vp "$dirin"
 mkdir -vp "$dirout"
 
-print_log "copy source code and test cases"
+print_log "copy source codes and test cases"
 cp -v *.c "$dirtest"
 cp -v input*.txt "$dirin"
 cp -v output*.txt "$dirout"
+
+cd "$dirtest"
+print_log "compile source codes"
+time ${COMPILER} *.c -Wall -Wextra -o "$fileexe"
+
+if [ -e "$fileexe" ];
+then
+    print_ok "file '${fileexe}' was built successfully"
+    
+    # doing something
+else
+    print_warn "build failure"
+fi
 
 print_log "clean up tmp files"
 rm -vfr "$dirtest"
