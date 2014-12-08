@@ -69,7 +69,7 @@
 "origin from master branch remote track to up set master Branch"
 
 [INPUT]
-   "+-*/"
+   "+-*/"   
 [OUTPUT]
 "+-*/"
 
