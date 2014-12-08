@@ -1,0 +1,55 @@
+[INPUT]
+""
+[OUTPUT]
+""
+
+[INPUT]
+" "
+[OUTPUT]
+" "
+
+[INPUT]
+"     "
+[OUTPUT]
+"     "
+
+[INPUT]
+"   a"
+[OUTPUT]
+"a   "
+
+[INPUT]
+"a"
+[OUTPUT]
+"a"
+
+[INPUT]
+"abC"
+[OUTPUT]
+"abC"
+
+[INPUT]
+" abcde"
+[OUTPUT]
+"abcde "
+
+[INPUT]
+"abcde  "
+[OUTPUT]
+"  abcde"
+[INPUT]
+"  abc de f "
+[OUTPUT]
+" f de abc  "
+[INPUT]
+"abc de f"
+[OUTPUT]
+"f de abc"
+[INPUT]
+"abc   123"
+[OUTPUT]
+"123   abc"
+[INPUT]
+"abc de ffff de de"
+[OUTPUT]
+"de de ffff de abc"
