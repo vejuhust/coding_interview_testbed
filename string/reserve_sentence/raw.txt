@@ -57,3 +57,13 @@
 "abc de ffff de de"
 [OUTPUT]
 "de de ffff de abc"
+
+[INPUT]
+"I am going to school"
+[OUTPUT]
+"school to going am I"
+
+[INPUT]
+"Branch master set up to track remote branch master from origin"
+[OUTPUT]
+"origin from master branch remote track to up set master Branch"
