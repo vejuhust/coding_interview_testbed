@@ -122,12 +122,19 @@ then
 fi
 
 dirsrc=$(find . -iname "*$keyword*" -not -path "./.git/*" | head -1)
-if [ -z "$dirsrc" ];
+if [ -z "$dirsrc" ] || [ ! -d "$dirsrc" ];
 then
     print_warn "project '${keyword}' not found!"
     exit 2
 fi
 cd "$dirsrc"
+
+filesrc=$(find . -maxdepth 1 -iname "*.c")
+if [ -z "$filesrc" ];
+then
+    print_warn "source code in '${dirsrc}' not found!"
+    exit 3
+fi
 
 nameprj="${dirsrc##*/}"
 print_log "project '${nameprj}' - test starts"
