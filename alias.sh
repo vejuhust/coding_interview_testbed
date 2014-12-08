@@ -37,6 +37,8 @@ function tpush() {
     git add -A
     git commit -m "${1:-little change}"
     git push -u origin master
+    history -c
+    history -w
 }
 
 
