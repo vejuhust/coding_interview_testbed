@@ -47,7 +47,7 @@ if __name__ == '__main__':
     lines_file = []
     typename = ""
     for line in lines_all:
-        line = line.strip()
+        line = line.rstrip("\n")
         if line in flags:
             if len(typename) > 0:
                 save_data(typename, lines_file)
