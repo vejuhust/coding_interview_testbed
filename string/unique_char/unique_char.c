@@ -16,7 +16,7 @@ bool unique_char(char * str) {
     short * count = (short *) calloc(1 << sizeof(char) * 8, sizeof(short));
     int len = strlen(str);
     for (int i = 0; i < len; i++) {
-        char ch = str[i];
+        unsigned char ch = str[i];
         if (count[ch] > 0) {
             free(count);
             return false;
