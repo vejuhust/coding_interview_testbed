@@ -9,7 +9,25 @@ bool result;
 #define MAXLEN 65535
 
 bool unique_char(char * str) {
-    return false;
+    if (NULL == str || 0 == strlen(str)) {
+        return false;
+    }
+    
+    short * count = (short *) calloc(1 << sizeof(char) * 8, sizeof(short));
+    int len = strlen(str);
+    for (int i = 0; i < len; i++) {
+        char ch = str[i];
+        if (count[ch] > 0) {
+            free(count);
+            return false;
+        }
+        else {
+            count[ch] += 1;
+        }
+    }
+    
+    free(count);
+    return true;
 }
 
 int data_input(char * filename) {
