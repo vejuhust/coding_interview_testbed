@@ -37,18 +37,22 @@
 "abcde  "
 [OUTPUT]
 "  abcde"
+
 [INPUT]
 "  abc de f "
 [OUTPUT]
 " f de abc  "
+
 [INPUT]
 "abc de f"
 [OUTPUT]
 "f de abc"
+
 [INPUT]
 "abc   123"
 [OUTPUT]
 "123   abc"
+
 [INPUT]
 "abc de ffff de de"
 [OUTPUT]

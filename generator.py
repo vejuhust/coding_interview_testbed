@@ -40,13 +40,17 @@ if __name__ == '__main__':
     
     lines_all = load_raw_data("string/reserve_sentence/raw.txt")
     lines_file = []
+    typename = ""
     for line in lines_all:
         line = line.strip()
         if line in flags:
-            typename = line.lstrip("[").rstrip("]").lower()
-            save_data(typename, lines_file)
+            if len(typename) > 0:
+                save_data(typename, lines_file)
             lines_file = []
+            typename = line.lstrip("[").rstrip("]").lower()
         else:
             lines_file.append(line)
+    if len(typename) > 0:
+        save_data(typename, lines_file)
     
     print dirname, "is ready now"
