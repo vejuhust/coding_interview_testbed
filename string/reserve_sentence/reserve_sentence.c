@@ -7,8 +7,42 @@ char * str_dest;
 
 #define MAXLEN 65535
 
-char * reserve_sentence(char * ss) {
-    return ss;
+char * reserve_string(char * str, int len) {
+    int mid = len >> 1;
+    char tmp;
+    for (int i = 0; i < mid; i++) {
+        tmp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = tmp;
+    }
+    return str;
+}
+
+char * reserve_sentence(char * str) {
+    if (NULL == str || 0 == strlen(str)) {
+        return str;
+    }
+    int len = strlen(str);
+    reserve_string(str, len);
+    
+    int flag = 0, pos = 0;
+    for (int p = 0; p < len; p++) {
+        if (' ' == str[p]) {
+            if (1 == flag) {
+                reserve_string(str + sizeof(char) * pos, p - pos);
+                flag = 0;
+            }
+        }
+        else if (0 == flag) {
+            pos = p;
+            flag = 1;
+        }
+    }
+    if (1 == flag) {
+        reserve_string(str + sizeof(char) * pos, len - pos);
+    }
+
+    return str;
 }
 
 int data_input(char * filename) {

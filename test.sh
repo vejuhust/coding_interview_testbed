@@ -150,7 +150,7 @@ cp -f"$verbose" output*.txt "$dirout"
 
 cd "$dirtest"
 print_log "compile source codes"
-eval "$time_count" "$compiler" *.c -Wall -Wextra -o "$fileexe"
+eval "$time_count" "$compiler" *.c -std=c99 -Wall -Wextra -o "$fileexe"
 
 if [ -e "$fileexe" ];
 then
