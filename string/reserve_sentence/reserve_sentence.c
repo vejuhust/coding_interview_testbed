@@ -21,8 +21,20 @@ int data_input(char * filename) {
         if (NULL != fgets(str_src, MAXLEN, fp)) {
             int len = strlen(str_src);
             if (len >= 2) {
-                *(str_src + (len - 1) * sizeof(char)) = '\0';
-                str_src += sizeof(char);
+                char * tmpe = (str_src + (len - 1) * sizeof(char));
+                while (('\"' != *(tmpe)) && (tmpe > str_src)) {
+                    tmpe--;
+                }
+                *(tmpe) = '\0';
+                
+                char * tmps = str_src;
+                while (('\"' != *(tmps)) && (tmps < tmpe)) {
+                    tmps++;
+                }
+                if ('\"' == *(tmps)) {
+                    str_src = tmps + 1;
+                }
+                
                 fclose(fp);
                 return 0;
             }
@@ -38,7 +50,7 @@ int data_output(char * filename) {
         return 1;
     }
     else {
-        fprintf(fp, "%d\n", strlen(str_dest));
+        //fprintf(fp, "%d\n", strlen(str_dest));
         fprintf(fp, "\"%s\"", str_dest);
         fclose(fp);
     }

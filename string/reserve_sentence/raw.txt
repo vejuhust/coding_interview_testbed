@@ -67,3 +67,13 @@
 "Branch master set up to track remote branch master from origin"
 [OUTPUT]
 "origin from master branch remote track to up set master Branch"
+
+[INPUT]
+   "+-*/"
+[OUTPUT]
+"+-*/"
+
+[INPUT]
+"    
+[OUTPUT]
+""
