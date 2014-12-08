@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import string
 import random
 
@@ -38,7 +39,11 @@ if __name__ == '__main__':
     dirname = "/tmp/data-%s/" % random_string()
     os.mkdir(dirname)
     
-    lines_all = load_raw_data("string/reserve_sentence/raw.txt")
+    filename = "raw.txt"
+    if len(sys.argv) >= 2:
+        filename = sys.argv[1].strip()
+    lines_all = load_raw_data(filename)
+    
     lines_file = []
     typename = ""
     for line in lines_all:
