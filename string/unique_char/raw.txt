@@ -1,0 +1,24 @@
+[INPUT]
+""
+[OUTPUT]
+false
+
+[INPUT]
+"   "
+[OUTPUT]
+false
+
+[INPUT]
+"aa"
+[OUTPUT]
+false
+
+[INPUT]
+"abcdefga"
+[OUTPUT]
+false
+
+[INPUT]
+"abcdefgh"
+[OUTPUT]
+true
