@@ -24,12 +24,12 @@ char * reserve_sentence(char * str) {
     }
     int len = strlen(str);
     reserve_string(str, len);
-    
+
     int flag = 0, pos = 0;
     for (int p = 0; p < len; p++) {
         if (' ' == str[p]) {
             if (1 == flag) {
-                reserve_string(str + sizeof(char) * pos, p - pos);
+                reserve_string(str + pos, p - pos);
                 flag = 0;
             }
         }
@@ -39,7 +39,7 @@ char * reserve_sentence(char * str) {
         }
     }
     if (1 == flag) {
-        reserve_string(str + sizeof(char) * pos, len - pos);
+        reserve_string(str + pos, len - pos);
     }
 
     return str;
@@ -56,12 +56,12 @@ int data_input(char * filename) {
         if (NULL != fgets(str_src, MAXLEN, fp)) {
             int len = strlen(str_src);
             if (len >= 2) {
-                char * tmpe = (str_src + (len - 1) * sizeof(char));
+                char * tmpe = (str_src + len - 1);
                 while (('\"' != *(tmpe)) && (tmpe > str_src)) {
                     tmpe--;
                 }
                 *(tmpe) = '\0';
-                
+
                 char * tmps = str_src;
                 while (('\"' != *(tmps)) && (tmps < tmpe)) {
                     tmps++;
@@ -69,7 +69,7 @@ int data_input(char * filename) {
                 if ('\"' == *(tmps)) {
                     str_src = tmps + 1;
                 }
-                
+
                 fclose(fp);
                 return 0;
             }

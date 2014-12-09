@@ -41,7 +41,7 @@ int data_input(char * filename) {
         if (NULL != fgets(str_src, MAXLEN, fp)) {
             int len = strlen(str_src);
             if (len >= 2) {
-                char * tmpe = (str_src + (len - 1) * sizeof(char));
+                char * tmpe = (str_src + len - 1);
                 while (('\"' != *(tmpe)) && (tmpe > str_src)) {
                     tmpe--;
                 }
