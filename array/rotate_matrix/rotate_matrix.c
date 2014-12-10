@@ -8,7 +8,9 @@ int matrix [MAXLEN][MAXLEN];
 int len_mat;
 
 void rotate_matrix(int a[MAXLEN][MAXLEN], int len) {
-    
+    if (len <= 1) {
+        return;
+    }
 }
 
 int data_input(char * filename) {
@@ -38,11 +40,16 @@ int data_output(char * filename) {
         return 1;
     }
     else {
-        for (int i = 0; i < len_mat; i++) {
-            for (int j = 0; j < len_mat; j++) {
-                fprintf(fp, "%d ", matrix[i][j]);
+        if (0 == len_mat) {
+            fprintf(fp, " ");
+        }
+        else {
+            for (int i = 0; i < len_mat; i++) {
+                for (int j = 0; j < len_mat; j++) {
+                    fprintf(fp, "%d ", matrix[i][j]);
+                }
+                fprintf(fp, "\n");
             }
-            fprintf(fp, "\n");
         }
         fclose(fp);
     }
