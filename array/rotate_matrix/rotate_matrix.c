@@ -11,6 +11,16 @@ void rotate_matrix(int a[MAXLEN][MAXLEN], int len) {
     if (len <= 1) {
         return;
     }
+    
+    for (int dep = 0; dep < len >> 1; dep++) {
+        for (int pos = dep; pos < len -dep - 1; pos++) {
+            int tmp = a[dep][pos];
+            a[dep][pos] = a[len - pos -1][dep];
+            a[len - pos - 1][dep] = a[len - dep - 1][len - pos - 1];
+            a[len - dep - 1][len - pos - 1] = a[pos][len - dep - 1];
+            a[pos][len - dep - 1] = tmp;
+        }
+    }
 }
 
 int data_input(char * filename) {
