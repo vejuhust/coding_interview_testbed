@@ -5,21 +5,12 @@
 #define MAXLEN 1024
 
 int matrix [MAXLEN][MAXLEN];
-int len_mat;
+int len_row;
+int len_col;
 
-void rotate_matrix(int a[MAXLEN][MAXLEN], int len) {
-    if (len <= 1) {
+void set_row_col(int a[MAXLEN][MAXLEN], int len_row, int len_col) {
+    if (len_row < 1 || len_col < 1) {
         return;
-    }
-    
-    for (int dep = 0; dep < len >> 1; dep++) {
-        for (int pos = dep; pos < len -dep - 1; pos++) {
-            int tmp = a[dep][pos];
-            a[dep][pos] = a[len - pos -1][dep];
-            a[len - pos - 1][dep] = a[len - dep - 1][len - pos - 1];
-            a[len - dep - 1][len - pos - 1] = a[pos][len - dep - 1];
-            a[pos][len - dep - 1] = tmp;
-        }
     }
 }
 
@@ -30,9 +21,9 @@ int data_input(char * filename) {
         return 1;
     }
     else {
-        if (0 != fscanf(fp, "%d", &len_mat)) {
-            for (int i = 0; i < len_mat; i++) {
-                for (int j = 0; j < len_mat; j++) {
+        if (0 != fscanf(fp, "%d%d", &len_row, &len_col)) {
+            for (int i = 0; i < len_row; i++) {
+                for (int j = 0; j < len_col; j++) {
                     fscanf(fp, "%d", &(matrix[i][j]));
                 }
             }
@@ -50,12 +41,12 @@ int data_output(char * filename) {
         return 1;
     }
     else {
-        if (0 == len_mat) {
+        if (len_row < 1 || len_col < 1) {
             fprintf(fp, " ");
         }
         else {
-            for (int i = 0; i < len_mat; i++) {
-                for (int j = 0; j < len_mat; j++) {
+            for (int i = 0; i < len_row; i++) {
+                for (int j = 0; j < len_col; j++) {
                     fprintf(fp, "%d ", matrix[i][j]);
                 }
                 fprintf(fp, "\n");
@@ -68,7 +59,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        rotate_matrix(matrix, len_mat);
+        set_row_col(matrix, len_row, len_col);
         if (0 == data_output("output.txt")) {
             return 0;
         }
