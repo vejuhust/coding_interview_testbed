@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define MAXLEN 1024
 
@@ -12,6 +13,29 @@ void set_row_col(int a[MAXLEN][MAXLEN], int len_row, int len_col) {
     if (len_row < 1 || len_col < 1) {
         return;
     }
+    
+    bool * flag_col = (bool *) calloc(len_col, sizeof(bool));
+    bool * flag_row = (bool *) calloc(len_row, sizeof(bool));
+    
+    for (int row = 0; row < len_row; row++) {
+        for (int col = 0; col < len_col; col++) {
+            if (0 == a[row][col]) {
+                flag_col[col] = true;
+                flag_row[row] = true;
+            }
+        }
+    }
+    
+    for (int row = 0; row < len_row; row++) {
+        for (int col = 0; col < len_col; col++) {
+            if (flag_col[col] || flag_row[row]) {
+                a[row][col] = 0;
+            }
+        }
+    }
+    
+    free(flag_col);
+    free(flag_row);
 }
 
 int data_input(char * filename) {
