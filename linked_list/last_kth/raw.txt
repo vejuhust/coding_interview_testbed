@@ -42,7 +42,7 @@
 [INPUT]
 0 0
 [OUTPUT]
- 0 -1
+ 
 
 [INPUT]
 0 1
