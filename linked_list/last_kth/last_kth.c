@@ -13,7 +13,26 @@ node * result = NULL;
 int k = 0;
 
 node * last_kth(node * head, int k) {
-    return head;
+    if (NULL == head || k < 1) {
+        return NULL;
+    }
+    
+    node * p1 = head;
+    node * p2 = head;
+    
+    for (int i = 1; i < k; i++) {
+        p2 = p2->next;
+        if (NULL == p2) {
+            return NULL;
+        }
+    }
+    
+    while (NULL != p2->next) {
+        p2 = p2->next;
+        p1 = p1->next;
+    }
+    
+    return p1;
 }
 
 int data_input(char * filename) {
