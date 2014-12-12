@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 typedef struct _node {
-    int value;
+    long value;
     struct _node * next;
 } node;
 
@@ -60,7 +60,7 @@ int data_output(char * filename) {
             fprintf(fp, " ");
         }
         else {
-            fprintf(fp, "%d", result->value);
+            fprintf(fp, "%ld", result->value);
         }
         fclose(fp);
     }
