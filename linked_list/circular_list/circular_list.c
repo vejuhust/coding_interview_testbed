@@ -12,7 +12,21 @@ node * head = NULL;
 node * result = NULL;
 
 node * find_joint(node * head) {
-    return head;
+    node ** flag = (node **) calloc(1024, sizeof(node *));
+    node * ptr = head;
+    int count = 0;
+    while (NULL != ptr) {
+        for (int i = 0; i < count; i++) {
+            if (flag[i] == ptr) {
+                free(flag);
+                return ptr;
+            }
+        }
+        flag[count++] = ptr;
+        ptr = ptr->next;
+    }
+    
+    return ptr;
 }
 
 int data_input(char * filename) {
