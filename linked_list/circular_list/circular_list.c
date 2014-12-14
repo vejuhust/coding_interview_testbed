@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define SOLUTION find_joint1
+
 typedef struct _node {
     long value;
     struct _node * next;
@@ -11,7 +13,7 @@ typedef struct _node {
 node * head = NULL;
 node * result = NULL;
 
-node * find_joint(node * head) {
+node * find_joint2(node * head) {
     node * p1 = head;
     node * p2 = head;
     
@@ -34,6 +36,60 @@ node * find_joint(node * head) {
     }
     
     return p1;
+}
+
+#define HASH_PRIME 1543
+
+typedef struct _hash {
+    node * value;
+    struct _hash * next;
+} hash;
+
+void hash_insert(hash ** table, node * target) {
+    int addr = (int)target % HASH_PRIME;
+    hash * node = (hash *) calloc(1, sizeof(hash));
+    node->value = target;
+    node->next = NULL;
+    if (NULL == table[addr]) {
+        table[addr] = node;
+    }
+    else {
+        hash * tmp = table[addr];
+        while (NULL != tmp->next) {
+            tmp = tmp->next;
+        }
+        tmp->next = node;
+    }
+}
+
+bool hash_exist(hash ** table, node * target) {
+    int addr = (int)target % HASH_PRIME;
+    if (NULL != table[addr]) {
+        hash * tmp = table[addr];
+        while (NULL != tmp) {
+            if (tmp->value == target) {
+                return true;
+            }
+            tmp = tmp->next;
+        }
+    }
+    return false;
+}
+
+node * find_joint1(node * head) {
+    hash ** table = (hash **) calloc(HASH_PRIME, sizeof(hash *));
+    node * ptr = head;
+    while (NULL != ptr) {
+        if (hash_exist(table, ptr)) {
+            free(table);
+            return ptr;
+        }
+        hash_insert(table, ptr);
+        ptr = ptr->next;
+    }
+    
+    free(table);
+    return ptr;
 }
 
 node * find_joint0(node * head) {
@@ -115,7 +171,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        result = find_joint(head);
+        result = SOLUTION(head);
         if (0 == data_output("output.txt")) {
             return 0;
         }
