@@ -14,10 +14,18 @@ node * result = NULL;
 node * find_joint(node * head) {
     node * p1 = head;
     node * p2 = head;
-    do {
+    
+    while (NULL != p2 && NULL != p2->next) {
         p1 = p1->next;
         p2 = p2->next->next;
-    } while (p1 != p2);
+        if (p1 == p2) {
+            break;
+        }
+    }
+    
+    if (NULL == p2 || NULL == p2->next) {
+        return NULL;
+    }
     
     p1 = head;
     while (p1 != p2) {
