@@ -4,6 +4,62 @@
 #include <stdbool.h>
 #include <limits.h>
 
+
+#define LINKED 1
+
+#ifdef LINKED
+
+typedef struct _node {
+    long value;
+    struct _node * next;
+} node;
+
+typedef struct _stack {
+    node * data;
+} stack;
+
+stack src = { .data = NULL };
+stack tmp = { .data = NULL };
+
+bool stack_isempty(stack * src) {
+    return NULL == src->data;
+}
+
+void stack_push(stack * src, long value) {
+    node * tmp = (node *) calloc(1, sizeof(node));
+    tmp->next = NULL;
+    tmp->value = value;
+    
+    if (stack_isempty(src)) {
+        src->data = tmp;    
+    }
+    else {
+        tmp->next = src->data;
+        src->data = tmp;
+    }
+}
+
+long stack_pop(stack * src) {
+    long value;
+    if (stack_isempty(src)) {
+        value = LONG_MIN; 
+    }
+    else {
+        node * tmp = src->data;
+        src->data = src->data->next;
+        value = tmp->value;
+        free(tmp);
+    }
+    
+    return value;
+}
+
+long stack_peek(stack * src) {
+    return stack_isempty(src) ? LONG_MIN : src->data->value;
+}
+
+#else
+
 #define MAXLEN 1024
 
 typedef struct _stack {
@@ -30,6 +86,8 @@ long stack_pop(stack * src) {
 long stack_peek(stack * src) {
     return stack_isempty(src) ? LONG_MIN : src->data[src->top];
 }
+
+#endif
 
 void sort_stack(stack * src, stack * tmp) {
     while (!stack_isempty(src)) {
