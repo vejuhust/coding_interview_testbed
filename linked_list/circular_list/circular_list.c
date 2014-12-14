@@ -12,6 +12,23 @@ node * head = NULL;
 node * result = NULL;
 
 node * find_joint(node * head) {
+    node * p1 = head;
+    node * p2 = head;
+    do {
+        p1 = p1->next;
+        p2 = p2->next->next;
+    } while (p1 != p2);
+    
+    p1 = head;
+    while (p1 != p2) {
+        p1 = p1->next;
+        p2 = p2->next;
+    }
+    
+    return p1;
+}
+
+node * find_joint0(node * head) {
     node ** flag = (node **) calloc(1024, sizeof(node *));
     node * ptr = head;
     int count = 0;
