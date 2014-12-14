@@ -33,29 +33,11 @@ long stack_peek(stack * src) {
 
 void sort_stack(stack * src, stack * tmp) {
     while (!stack_isempty(src)) {
-        long max = LONG_MIN;
-        int count = 0;
-        while (!stack_isempty(src)) {
-            long value = stack_pop(src);
-            stack_push(tmp, value);
-            
-            if (value > max) {
-                max = value;
-            }
-            count++;
+        long value = stack_pop(src);
+        while (!stack_isempty(tmp) && stack_peek(tmp) < value) {
+            stack_push(src, stack_pop(tmp));
         }
-        
-        bool flag = true;
-        for (int i = 0; i < count; i++) {
-            long value = stack_pop(tmp);
-            if (flag && value == max) {
-                flag = false;
-            }
-            else {
-                stack_push(src, value);
-            }
-        }
-        stack_push(tmp, max);
+        stack_push(tmp, value);
     }
     
     while (!stack_isempty(tmp)) {
