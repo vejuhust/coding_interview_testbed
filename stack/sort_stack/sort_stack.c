@@ -32,7 +32,7 @@ long stack_peek(stack * src) {
 }
 
 void sort_stack(stack * src, stack * tmp) {
-    while (true) {
+    while (!stack_isempty(src)) {
         long max = LONG_MIN;
         int count = 0;
         while (!stack_isempty(src)) {
@@ -43,10 +43,6 @@ void sort_stack(stack * src, stack * tmp) {
                 max = value;
             }
             count++;
-        }
-        
-        if (0 == count) {
-            break;
         }
         
         bool flag = true;
