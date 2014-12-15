@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAXLEN 1024
+#define MAXLEN 2048
 
 typedef struct _tree {
     long            value;
