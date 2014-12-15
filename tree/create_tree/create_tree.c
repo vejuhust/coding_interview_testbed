@@ -17,6 +17,33 @@ int length = 0;
 long preorder   [MAXLEN];
 long inorder    [MAXLEN];
 
+void traversal_preorder(tree * root) {
+    if (NULL == root) {
+        return;
+    }
+    printf("%ld ", root->value);
+    traversal_preorder(root->left);
+    traversal_preorder(root->right);
+}
+
+void traversal_inorder(tree * root) {
+    if (NULL == root) {
+        return;
+    }
+    traversal_inorder(root->left);
+    printf("%ld ", root->value);
+    traversal_inorder(root->right);
+}
+
+void traversal_postorder(tree * root) {
+    if (NULL == root) {
+        return;
+    }
+    traversal_postorder(root->left);
+    traversal_postorder(root->right);
+    printf("%ld ", root->value);
+}
+
 int data_input(char * filename) {
     FILE * fp;
     if (NULL == (fp = fopen(filename, "r"))) {
