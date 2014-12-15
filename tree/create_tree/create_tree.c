@@ -18,27 +18,26 @@ long preorder   [MAXLEN];
 long inorder    [MAXLEN];
 
 tree * create_tree(long * preorder, long * inorder, int length) {
-    if (NULL == preorder || NULL == inorder || 0 >= length) {
+    if (length <= 0 || NULL == preorder || NULL == inorder) {
         return NULL;
     }
     
-    int pos = -1;
+    int len_left = -1;
     for (int i = 0; i < length; i++) {
         if (preorder[0] == inorder[i]) {
-            pos = i;
+            len_left = i;
             break;
         }
     }
-    if (0 > pos) {
+    if (0 > len_left) {
         return NULL;
     }
-    
-    int len_left = pos;
-    int len_right = length - pos - 1;
+    int len_right = length - len_left - 1;
+
     tree * root = (tree *) calloc(1, sizeof(tree));
     root->value = preorder[0];
-    root->left = create_tree(preorder + 1, inorder, len_left);
-    root->right = create_tree(preorder + 1 + len_left, inorder + len_left + 1, len_right);
+    root->left = len_left > 0 ? create_tree(preorder + 1, inorder, len_left) : NULL;
+    root->right = len_right > 0 ? create_tree(preorder + 1 + len_left, inorder + len_left + 1, len_right) : NULL;
     
     return root;
 }
