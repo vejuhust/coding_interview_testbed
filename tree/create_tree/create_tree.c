@@ -17,31 +17,57 @@ int length = 0;
 long preorder   [MAXLEN];
 long inorder    [MAXLEN];
 
-void traversal_preorder(tree * root) {
-    if (NULL == root) {
-        return;
+tree * create_tree(long * preorder, long * inorder, int length) {
+    if (NULL == preorder || NULL == inorder || 0 >= length) {
+        return NULL;
     }
-    printf("%ld ", root->value);
-    traversal_preorder(root->left);
-    traversal_preorder(root->right);
+    
+    int pos = -1;
+    for (int i = 0; i < length; i++) {
+        if (preorder[0] == inorder[i]) {
+            pos = i;
+            break;
+        }
+    }
+    if (0 > pos) {
+        return NULL;
+    }
+    
+    int len_left = pos;
+    int len_right = length - pos - 1;
+    tree * root = (tree *) calloc(1, sizeof(tree));
+    root->value = preorder[0];
+    root->left = create_tree(preorder + 1, inorder, len_left);
+    root->right = create_tree(preorder + 1 + len_left, inorder + len_left + 1, len_right);
+    
+    return root;
 }
 
-void traversal_inorder(tree * root) {
+void traversal_preorder(FILE * fp, tree * root) {
     if (NULL == root) {
         return;
     }
-    traversal_inorder(root->left);
-    printf("%ld ", root->value);
-    traversal_inorder(root->right);
+    fprintf(fp, "%ld ", root->value);
+    traversal_preorder(fp, root->left);
+    traversal_preorder(fp, root->right);
 }
 
-void traversal_postorder(tree * root) {
+void traversal_inorder(FILE * fp, tree * root) {
     if (NULL == root) {
         return;
     }
-    traversal_postorder(root->left);
-    traversal_postorder(root->right);
-    printf("%ld ", root->value);
+    traversal_inorder(fp, root->left);
+    fprintf(fp, "%ld ", root->value);
+    traversal_inorder(fp, root->right);
+}
+
+void traversal_postorder(FILE * fp, tree * root) {
+    if (NULL == root) {
+        return;
+    }
+    traversal_postorder(fp, root->left);
+    traversal_postorder(fp, root->right);
+    fprintf(fp, "%ld ", root->value);
 }
 
 int data_input(char * filename) {
@@ -74,7 +100,7 @@ int data_output(char * filename) {
             fprintf(fp, " ");
         }
         else {
-            fprintf(fp, "%ld", root->value);
+            traversal_postorder(fp, root);
         }
         fclose(fp);
     }
@@ -83,6 +109,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
+        root = create_tree(preorder, inorder, length);
         if (0 == data_output("output.txt")) {
             return 0;
         }
