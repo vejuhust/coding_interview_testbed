@@ -76,7 +76,7 @@ def process_amplify(raw):
     data = []
     for item in raw:
         if (rand_true(45)):
-            item *= rand_int(-1, 8)
+            item *= rand_int(-2, 8)
         data.append(item)
     random.shuffle(data)
     return data
@@ -110,8 +110,8 @@ def process_mix4(raw):
 
 if __name__ == '__main__':
     limit_min = 1
-    limit_max = 4096
+    limit_max = 1024 << 4
 
     raw = range(limit_min, limit_max + 1)
-    data = process_amplify(raw)
+    data = process_drop(raw)
     output_result(data)
