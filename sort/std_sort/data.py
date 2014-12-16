@@ -29,11 +29,20 @@ def output_result(raw):
     print_sorted(raw)
 
 
-def process(data):
+def process_shuffle(raw):
+    random.SystemRandom().shuffle(raw)
+    return raw
+
+def process_drop(raw):
+    data = []
+    for item in raw:
+        if (random.SystemRandom().randint(1, 10) <= 7):
+            data.append(item)
     random.shuffle(data)
+    return data
 
 
 if __name__ == '__main__':
     raw = range(limit_min, limit_max + 1)
-    process(raw)
-    output_result(raw)
+    data = process_drop(raw)
+    output_result(data)
