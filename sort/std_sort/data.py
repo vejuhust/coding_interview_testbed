@@ -81,6 +81,12 @@ def process_amplify(raw):
     random.shuffle(data)
     return data
 
+def process_ascend(raw):
+    return sorted(raw)
+
+def process_descend(raw):
+    return sorted(raw, reverse = True)
+
 
 def process_mix1(raw):
     data = process_shuffle(raw)
@@ -110,8 +116,8 @@ def process_mix4(raw):
 
 if __name__ == '__main__':
     limit_min = 1
-    limit_max = 1024 << 4
+    limit_max = 1024 * 2
 
     raw = range(limit_min, limit_max + 1)
-    data = process_drop(raw)
+    data = process_descend(raw)
     output_result(data)
