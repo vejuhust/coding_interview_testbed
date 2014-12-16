@@ -145,8 +145,8 @@ mkdir -p"$verbose" "$dirout"
 
 print_log "copy source codes and test cases"
 cp -f"$verbose" *.c "$dirtest"
-cp -f"$verbose" input*.txt "$dirin"
-cp -f"$verbose" output*.txt "$dirout"
+cp -f"$verbose" input/input*.txt "$dirin"
+cp -f"$verbose" output/output*.txt "$dirout"
 
 cd "$dirtest"
 print_log "compile source codes"
