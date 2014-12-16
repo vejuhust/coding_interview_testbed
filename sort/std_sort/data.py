@@ -29,6 +29,13 @@ def output_result(raw):
     print_sorted(raw)
 
 
+def rand_true(p):
+    return random.SystemRandom().randint(1, 100) <= p
+
+def rand_int(intmin, intmax):
+    return random.SystemRandom().randint(intmin, intmax)
+
+
 def process_shuffle(raw):
     random.SystemRandom().shuffle(raw)
     return raw
@@ -36,7 +43,7 @@ def process_shuffle(raw):
 def process_drop(raw):
     data = []
     for item in raw:
-        if (random.SystemRandom().randint(1, 10) <= 7):
+        if (rand_true(70)):
             data.append(item)
     random.shuffle(data)
     return data
@@ -49,9 +56,8 @@ def process_dropblock(raw):
             count -= 1
         else:
             data.append(item)
-            drop = random.SystemRandom().randint(1, 10) <= 2
-            if drop:
-                count = random.SystemRandom().randint(0, 6)
+            if rand_true(20):
+                count = rand_int(0, 6)
     random.shuffle(data)
     return data
 
