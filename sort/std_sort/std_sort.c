@@ -10,6 +10,12 @@
 long data [MAXLEN];
 int  length = 0;
 
+int compare_long(const void * a, const void * b) {
+    long * x = (long *) a;
+    long * y = (long *) b;
+    return *x - *y;
+}
+
 int data_input(char * filename) {
     FILE * fp;
     if (NULL == (fp = fopen(filename, "r"))) {
@@ -48,6 +54,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
+        qsort(data, length, sizeof(long), compare_long);
         if (0 == data_output("output.txt")) {
             return 0;
         }
