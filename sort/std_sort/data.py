@@ -71,12 +71,38 @@ def process_repeat(raw):
             data.append(item)
     random.shuffle(data)
     return data
+    
+
+def process_mix1(raw):
+    data = process_shuffle(raw)
+    data = process_drop(data)
+    data = process_dropblock(data)
+    data = process_repeat(data)
+    return data
+
+def process_mix2(raw):
+    data = process_shuffle(raw)
+    data = process_drop(data)
+    data = process_repeat(data)
+    return data
+
+def process_mix3(raw):
+    data = process_shuffle(raw)
+    data = process_dropblock(data)
+    data = process_repeat(data)
+    return data
+
+def process_mix4(raw):
+    data = process_shuffle(raw)
+    data = process_drop(data)
+    data = process_dropblock(data)
+    return data
 
 
 if __name__ == '__main__':
     limit_min = 1
-    limit_max = 1024
+    limit_max = 2455
 
     raw = range(limit_min, limit_max + 1)
-    data = process_repeat(raw)
+    data = process_mix4(raw)
     output_result(data)
