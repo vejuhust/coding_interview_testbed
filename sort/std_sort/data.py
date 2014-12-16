@@ -4,7 +4,7 @@
 import random
 
 limit_min = 1
-limit_max = 1024
+limit_max = 2048
 
 
 def print_length(data):
@@ -41,8 +41,22 @@ def process_drop(raw):
     random.shuffle(data)
     return data
 
+def process_dropblock(raw):
+    data = []
+    count = 0
+    for item in raw:
+        if count > 0:
+            count -= 1
+        else:
+            data.append(item)
+            drop = random.SystemRandom().randint(1, 10) <= 2
+            if drop:
+                count = random.SystemRandom().randint(0, 6)
+    random.shuffle(data)
+    return data
+
 
 if __name__ == '__main__':
     raw = range(limit_min, limit_max + 1)
-    data = process_drop(raw)
+    data = process_dropblock(raw)
     output_result(data)
