@@ -3,9 +3,6 @@
 
 import random
 
-limit_min = 1
-limit_max = 2048
-
 
 def print_length(data):
     print len(data)
@@ -27,6 +24,7 @@ def output_result(raw):
     print_raw(raw)
     print "[OUTPUT]"
     print_sorted(raw)
+    print ""
 
 
 def rand_true(p):
@@ -61,8 +59,24 @@ def process_dropblock(raw):
     random.shuffle(data)
     return data
 
+def process_repeat(raw):
+    data = []
+    for item in raw:
+        if (rand_true(15)):
+            count = rand_int(0, 3)
+            while count > 0:
+                data.append(item)
+                count -= 1
+        else:
+            data.append(item)
+    random.shuffle(data)
+    return data
+
 
 if __name__ == '__main__':
+    limit_min = 1
+    limit_max = 1024
+
     raw = range(limit_min, limit_max + 1)
-    data = process_dropblock(raw)
+    data = process_repeat(raw)
     output_result(data)
