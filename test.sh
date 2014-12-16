@@ -4,6 +4,7 @@ TZ='Asia/Shanghai'; export TZ
 
 compiler=gcc
 time_count=time
+cutter=1-150
 
 verbose=
 limitdata=5
@@ -56,9 +57,9 @@ function test_and_diff() {
     input="$1"
     output="$2"
     print_info "input file content - '${input}'"
-    colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
+    colorize_output "$color_blue" "$(cat "$input" | head -${limitdata} | cut -c ${cutter})"
     print_info "output file content - '${output}'"
-    colorize_output "$color_blue" "$(cat "$output" | head -${limitdata})"
+    colorize_output "$color_blue" "$(cat "$output" | head -${limitdata} | cut -c ${cutter})"
     cp -f"$verbose" "$input" "$filetmpin"
     print_log "execute '${fileexe}' with '${input}'"
     eval "$time_count" "$fileexe"
@@ -72,7 +73,12 @@ function test_and_diff() {
             count_ok=`expr $count_ok + 1`
         else
             print_warn "test failure"
-            colorize_output "$color_red" "$result"
+            cutted=""
+            for line in "$result"
+            do
+                cutted+=$(echo "$line" | cut -c "$cutter")
+            done
+            colorize_output "$color_red" "$cutted"
         fi
     else
         print_warn "execution failure"
@@ -85,7 +91,7 @@ function test_only() {
     if [ -e "$input" ];
     then
         print_info "input file content - '${input}'"
-        colorize_output "$color_blue" "$(cat "$input" | head -${limitdata})"
+        colorize_output "$color_blue" "$(cat "$input" | head -${limitdata} | cut -c ${cutter})"
         cp -f"$verbose" "$input" "$filetmpin"
         print_log "execute '${fileexe}' with '${input}'"
     else
@@ -99,7 +105,7 @@ function test_only() {
         if [ -e "$filetmpout" ];
         then
             print_info "execution result file - '${filetmpout}'"
-            colorize_output "$color_blue" "$(cat "$filetmpout" | head -${limitdata})"
+            colorize_output "$color_blue" "$(cat "$filetmpout" | head -${limitdata} | cut -c ${cutter})"
         else
             print_info "execution result stdout"
             colorize_output "$color_blue" "$result"
