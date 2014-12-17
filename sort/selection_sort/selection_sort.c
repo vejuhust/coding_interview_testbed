@@ -6,6 +6,7 @@
 
 
 #define MAXLEN 16384
+#define EXCHANGE(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
@@ -17,9 +18,7 @@ void selection_sort(long * data, int len_data) {
             min = data[j] < data[min] ? j : min;
         }
 
-        long tmp = data[i];
-        data[i] = data[min];
-        data[min] = tmp;
+        EXCHANGE(data[i], data[min]);
     }
 }
 
