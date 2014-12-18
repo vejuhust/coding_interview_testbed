@@ -6,6 +6,7 @@
 
 
 #define MAXLEN 16384
+#define EXCHANGE(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
@@ -19,9 +20,7 @@ void shell_sort(long * data, int len_data) {
     while (h >= 1) {
         for (int i = h; i < len_data; i++) {
             for (int j = i; j >= h && data[j - h] > data[j]; j -= h)  {
-                long tmp = data[j];
-                data[j] = data[j - h];
-                data[j - h] = tmp;
+                EXCHANGE(data[j], data[j - h]);
             }
         }
         h /= 3;
