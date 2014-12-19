@@ -16,12 +16,8 @@ void quick_sort(long * data, int low, int high) {
     int j = high;
 
     do {
-        while (data[i] < x) {
-            i++;
-        }
-        while (x < data[j]) {
-            j--;
-        }
+        for (; data[i] < x; i++);
+        for (; x < data[j]; j--);
 
         if (i <= j) {
             swap(data[i], data[j]);
