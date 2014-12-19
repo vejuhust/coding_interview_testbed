@@ -9,6 +9,11 @@ alias ls='ls --color=tty --classify $*'
 alias ll='ls -lhA'
 
 export TPATH=/var/lib/cloud9/technical_interview_questions/
+export TZ='Asia/Shanghai'
+
+function pause(){
+   read -p "$*"
+}
 
 function mcd() {
     mkdir -p "$1" && cd "$1" && touch "${1##*/}.c"
@@ -34,6 +39,8 @@ function tcd() {
 function tpush() {
     cd $TPATH
     git status
+    date
+    pause "Press [Enter] key to confirm the files and current date..."
     git add -A
     git commit -m "${1:-little change}"
     git push -u origin master
