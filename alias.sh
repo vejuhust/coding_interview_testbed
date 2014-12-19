@@ -41,8 +41,8 @@ function tpush() {
     git status
     datestr="$(date)"
     echo -e "\033[0;31mCurrent Time: ${datestr}\033[0m"
-    
     pause "Press [Enter] key to confirm the files and current date..."
+    
     git add -A
     git commit -m "${1:-little change}"
     git push -u origin master
