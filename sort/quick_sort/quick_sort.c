@@ -10,7 +10,7 @@
 long data [MAXLEN];
 int  length = 0;
 
-void quicksort(long * data, int low, int high) {
+void quick_sort(long * data, int low, int high) {
     long x = data[(low + high) >> 1];
     int i = low;
     int j = high;
@@ -31,15 +31,11 @@ void quicksort(long * data, int low, int high) {
     } while (i <= j);
 
     if (low < j) {
-        quicksort(data, low, j);
+        quick_sort(data, low, j);
     }
     if (i < high) {
-        quicksort(data, i, high);
+        quick_sort(data, i, high);
     }
-}
-
-void quick_sort(long * data, int len_data) {
-    quicksort(data, 0, len_data - 1);
 }
 
 int data_input(char * filename) {
@@ -80,7 +76,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        quick_sort(data, length);
+        quick_sort(data, 0, length - 1);
         if (0 == data_output("output.txt")) {
             return 0;
         }
