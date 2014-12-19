@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include <limits.h>
 
-
 #define MAXLEN 16384
 
 long data [MAXLEN];
