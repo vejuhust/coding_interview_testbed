@@ -6,7 +6,7 @@
 
 
 #define MAXLEN 16384
-#define EXCHANGE(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
+#define swap(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
@@ -14,7 +14,7 @@ int  length = 0;
 void insertion_sort(long * data, int len_data) {
     for (int i = 1; i < len_data; i++) {
         for (int j = i; j >= 1 && data[j - 1] > data[j]; j--)  {
-            EXCHANGE(data[j], data[j - 1]);
+            swap(data[j], data[j - 1]);
         }
     }
 }

@@ -6,7 +6,7 @@
 
 
 #define MAXLEN 16384
-#define EXCHANGE(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
+#define swap(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
@@ -25,7 +25,7 @@ void quicksort(long * data, int low, int high) {
         }
 
         if (i <= j) {
-            EXCHANGE(data[i], data[j]);
+            swap(data[i], data[j]);
             i++;
             j--;
         }
