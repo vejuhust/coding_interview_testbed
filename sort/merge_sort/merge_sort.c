@@ -9,10 +9,48 @@
 long data [MAXLEN];
 int  length = 0;
 
-int compare_long(const void * a, const void * b) {
-    long * x = (long *) a;
-    long * y = (long *) b;
-    return *x - *y;
+void merge(long * data, long * aux, int low, int mid, int high) {
+    int i = low;
+    int j = mid + 1;
+    
+    for (int k = low; k <= high; k++) {
+        aux[k] = data[k];
+    }
+    
+    for (int k = low; k <= high; k++) {
+        if (i > mid) {
+            data[k] = aux[j++];
+        }
+        else if (j > high) {
+            data[k] = aux[i++];
+        }
+        else if (aux[i] > aux[j]) {
+            data[k] = aux[j++];
+        }
+        else {
+            data[k] = aux[i++];
+        }
+    }
+}
+
+void sort(long * data, long * aux, int low, int high) {
+    if (low >= high) {
+        return;
+    }
+    
+    int mid = (low + high) / 2;
+    sort(data, aux, low, mid);
+    sort(data, aux, mid + 1, high);
+
+    if (data[mid] > data[mid + 1]) {
+        merge(data, aux, low, mid, high);
+    }
+}
+
+void merge_sort(long * data, int length) {
+    long * aux = (long *) calloc(length, sizeof(long));
+    sort(data, aux, 0, length - 1);
+    free(aux);
 }
 
 int data_input(char * filename) {
@@ -53,7 +91,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        qsort(data, length, sizeof(long), compare_long);
+        merge_sort(data, length);
         if (0 == data_output("output.txt")) {
             return 0;
         }
