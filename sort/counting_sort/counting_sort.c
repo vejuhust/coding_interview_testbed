@@ -14,8 +14,7 @@ void counting_sort(long * data, int len_data) {
         return;
     }
     
-    long low = LONG_MAX;
-    long high = LONG_MIN;
+    long low = LONG_MAX, high = LONG_MIN;
     for (int i = 0; i < len_data; i++) {
         low = data[i] < low ? data[i] : low;
         high = data[i] > high ? data[i] : high;

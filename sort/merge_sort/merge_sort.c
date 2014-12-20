@@ -10,8 +10,7 @@ long data [MAXLEN];
 int  length = 0;
 
 void merge(long * data, long * aux, int low, int mid, int high) {
-    int i = low;
-    int j = mid + 1;
+    int i = low, j = mid + 1;
     
     for (int k = low; k <= high; k++) {
         aux[k] = data[k];

@@ -12,8 +12,7 @@ int  length = 0;
 
 void quick_sort(long * data, int low, int high) {
     long x = data[(low + high) >> 1];
-    int i = low;
-    int j = high;
+    int i = low, j = high;
 
     do {
         for (; data[i] < x; i++);
