@@ -18,7 +18,7 @@ void shell_sort(long * data, int len_data) {
 
     while (h >= 1) {
         for (int i = h; i < len_data; i++) {
-            for (int j = i; j >= h && data[j - h] > data[j]; j -= h)  {
+            for (int j = i; j >= h && data[j - h] > data[j]; j -= h) {
                 swap(data[j], data[j - h]);
             }
         }
