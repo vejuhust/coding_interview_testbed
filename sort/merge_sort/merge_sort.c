@@ -5,6 +5,8 @@
 #include <limits.h>
 
 #define MAXLEN 16384
+#define min(x,y) ((x) < (y) ? (x) : (y))
+// #define TOPDOWN 1
 
 long data [MAXLEN];
 int  length = 0;
@@ -32,6 +34,8 @@ void merge(long * data, long * aux, int low, int mid, int high) {
     }
 }
 
+#ifdef TOPDOWN
+
 void sort(long * data, long * aux, int low, int high) {
     if (low >= high) {
         return;
@@ -51,6 +55,26 @@ void merge_sort(long * data, int length) {
     sort(data, aux, 0, length - 1);
     free(aux);
 }
+
+#else
+
+void merge_sort(long * data, int length) {
+    long * aux = (long *) calloc(length, sizeof(long));
+    int low, mid, high;
+    
+    for (int size = 1; size < length; size *= 2) {
+        for (low = 0; low < length - size; low += size * 2) {
+            mid = low + size - 1;
+            high = min(mid + size, length - 1);
+            merge(data, aux, low, mid, high);
+        }
+    }
+    
+    free(aux);
+}
+
+#endif
+
 
 int data_input(char * filename) {
     FILE * fp;
