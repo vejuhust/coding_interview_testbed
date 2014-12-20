@@ -5,6 +5,8 @@
 #include <limits.h>
 
 #define MAXLEN 16384
+#define min(x,y) ((x) < (y) ? (x) : (y))
+#define max(x,y) ((x) > (y) ? (x) : (y))
 
 long data [MAXLEN];
 int  length = 0;
@@ -16,8 +18,8 @@ void counting_sort(long * data, int len_data) {
     
     long low = LONG_MAX, high = LONG_MIN;
     for (int i = 0; i < len_data; i++) {
-        low = data[i] < low ? data[i] : low;
-        high = data[i] > high ? data[i] : high;
+        low = min(data[i], low);
+        high = max(data[i], high);
     }
     
     int len_count = high - low + 1;
