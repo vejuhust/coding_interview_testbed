@@ -44,7 +44,7 @@ function tpush() {
     pause "Press [Enter] key to confirm the files and current date..."
     
     git add -A
-    git commit -m "${1:-little change}"
+    git commit -m "${1:-small changes}"
     git push -u origin master
     history -c
     history -w
