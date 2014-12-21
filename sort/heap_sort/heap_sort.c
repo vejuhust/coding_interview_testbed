@@ -5,14 +5,43 @@
 #include <limits.h>
 
 #define MAXLEN 16384
+#define swap(a, x, y) { long tmp; tmp = (a)[(x)]; (a)[(x)] = (a)[(y)]; (a)[(y)] = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
 
-int compare_long(const void * a, const void * b) {
-    long * x = (long *) a;
-    long * y = (long *) b;
-    return *x - *y;
+void swim(long * data, int k) {
+    while (k > 1 && data[k / 2] < data[k]) {
+        swap(data, k / 2, k);
+        k /= 2;
+    }
+}
+
+void sink(long * data, int length, int k) {
+    while (2 * k <= length) {
+        int j = 2 * k;
+        if (j < length && data[j] < data[j + 1]) {
+            j++;
+        }
+        if (data[k] >= data[j]) {
+            break;
+        }
+        else {
+            swap(data, k, j);
+            k = j;
+        }
+    }
+}
+
+void heap_sort(long * data, int length) {
+    int n = length;
+    for (int k = n / 2; k >= 1; k--) {
+        sink(data, n, k);
+    }
+    while (n > 1) {
+        swap(data, n, 1);
+        sink(data, --n, 1);
+    }
 }
 
 int data_input(char * filename) {
@@ -53,7 +82,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        qsort(data + 1, length, sizeof(long), compare_long);
+        heap_sort(data, length);
         if (0 == data_output("output.txt")) {
             return 0;
         }
