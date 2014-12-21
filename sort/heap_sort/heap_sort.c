@@ -23,7 +23,7 @@ int data_input(char * filename) {
     }
     else {
         fscanf(fp, "%d", &length);
-        for (int i = 0; i < length; i++) {
+        for (int i = 1; i <= length; i++) {
             fscanf(fp, "%ld", &data[i]);
         }
         fclose(fp);
@@ -42,7 +42,7 @@ int data_output(char * filename) {
             fprintf(fp, " ");
         }
         else {
-            for (int i = 0; i < length; i++) {
+            for (int i = 1; i <= length; i++) {
                 fprintf(fp, "%ld ", data[i]);
             }
         }
@@ -53,7 +53,7 @@ int data_output(char * filename) {
 
 int main() {
     if (0 == data_input("input.txt")) {
-        qsort(data, length, sizeof(long), compare_long);
+        qsort(data + 1, length, sizeof(long), compare_long);
         if (0 == data_output("output.txt")) {
             return 0;
         }
