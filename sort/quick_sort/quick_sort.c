@@ -28,7 +28,7 @@ void shuffle(long * data, int length) {
 }
 
 void quick_sort(long * data, int low, int high) {
-    long x = data[(low + high) >> 1];
+    long x = data[(low + high) / 2];
     int i = low, j = high;
 
     do {

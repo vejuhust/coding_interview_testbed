@@ -13,11 +13,11 @@ int  length = 0;
 
 void merge(long * data, long * aux, int low, int mid, int high) {
     int i = low, j = mid + 1;
-    
+
     for (int k = low; k <= high; k++) {
         aux[k] = data[k];
     }
-    
+
     for (int k = low; k <= high; k++) {
         if (i > mid) {
             data[k] = aux[j++];
@@ -40,8 +40,8 @@ void sort(long * data, long * aux, int low, int high) {
     if (low >= high) {
         return;
     }
-    
-    int mid = (low + high) >> 1;
+
+    int mid = (low + high) / 2;
     sort(data, aux, low, mid);
     sort(data, aux, mid + 1, high);
 
@@ -61,15 +61,15 @@ void merge_sort(long * data, int length) {
 void merge_sort(long * data, int length) {
     long * aux = (long *) calloc(length, sizeof(long));
     int low, mid, high;
-    
-    for (int size = 1; size < length; size <<= 1) {
-        for (low = 0; low < length - size; low += size + size) {
+
+    for (int size = 1; size < length; size *= 2) {
+        for (low = 0; low < length - size; low += size * 2) {
             mid = low + size - 1;
             high = min(mid + size, length - 1);
             merge(data, aux, low, mid, high);
         }
     }
-    
+
     free(aux);
 }
 
