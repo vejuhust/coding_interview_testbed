@@ -5,7 +5,7 @@
 #include <limits.h>
 
 #define MAXLEN 16384
-#define swap(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
+#define swap(a, x, y) { long tmp; tmp = (a)[(x)]; (a)[(x)] = (a)[(y)]; (a)[(y)] = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
@@ -19,7 +19,7 @@ void shell_sort(long * data, int len_data) {
     while (h >= 1) {
         for (int i = h; i < len_data; i++) {
             for (int j = i; j >= h && data[j - h] > data[j]; j -= h) {
-                swap(data[j], data[j - h]);
+                swap(data, j, j - h);
             }
         }
         h /= 3;

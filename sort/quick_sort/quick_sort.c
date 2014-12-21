@@ -6,7 +6,7 @@
 #include <time.h>
 
 #define MAXLEN 16384
-#define swap(x,y) { long tmp; tmp = (x); (x) = (y); (y) = tmp; }
+#define swap(a, x, y) { long tmp; tmp = (a)[(x)]; (a)[(x)] = (a)[(y)]; (a)[(y)] = tmp; }
 
 long data [MAXLEN];
 int  length = 0;
@@ -23,7 +23,7 @@ int randint(int low, int high) {
 void shuffle(long * data, int length) {
     for (int i = 0; i < length; i++) {
         int j = randint(i, length - 1);
-        swap(data[i], data[j]);
+        swap(data, i, j);
     }
 }
 
@@ -36,7 +36,7 @@ void quick_sort(long * data, int low, int high) {
         for (; x < data[j]; j--);
 
         if (i <= j) {
-            swap(data[i], data[j]);
+            swap(data, i, j);
             i++;
             j--;
         }
