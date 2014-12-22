@@ -63,7 +63,7 @@ void merge_sort(long * data, int length) {
     int low, mid, high;
 
     for (int size = 1; size < length; size *= 2) {
-        for (low = 0; low < length - size; low += size * 2) {
+        for (low = 0; low < length - size; low += 2 * size) {
             mid = low + size - 1;
             high = min(mid + size, length - 1);
             merge(data, aux, low, mid, high);
