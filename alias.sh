@@ -8,7 +8,7 @@ alias ......='cd ../../../../../'
 alias ls='ls --color=tty --classify $*'
 alias ll='ls -lhA'
 
-export TPATH=/var/lib/cloud9/technical_interview_questions/
+export TPATH=/var/lib/cloud9/coding_interview_testbed/
 export TZ='Asia/Shanghai'
 
 function pause(){
