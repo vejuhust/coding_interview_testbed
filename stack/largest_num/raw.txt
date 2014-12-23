@@ -1,0 +1,40 @@
+[INPUT]
+0 5
+[OUTPUT]
+ 
+
+[INPUT]
+1 1
+10
+[OUTPUT]
+10
+
+[INPUT]
+1 2
+20
+[OUTPUT]
+ 
+
+[INPUT]
+2 1
+10 20
+[OUTPUT]
+20
+
+[INPUT]
+2 2
+10 20
+[OUTPUT]
+20 10
+
+[INPUT]
+2 -1
+10 20
+[OUTPUT]
+ 
+
+[INPUT]
+10 5
+1 2 3 4 5 6 7 8 9 10
+[OUTPUT]
+10 9 8 7 6
