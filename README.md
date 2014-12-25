@@ -11,3 +11,7 @@ It was developed with [Cloud9](https://c9.io/) and running on [Debian](http://be
 * Batch test      
 * Common shortcuts / aliases      
 
+## Deploy
+
+## Usage
+
