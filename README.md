@@ -11,7 +11,12 @@ It was developed with [Cloud9](https://c9.io/) and running on [Debian](http://be
 * Batch test      
 * Common shortcuts / aliases      
 
+
 ## Deploy
+
+1. Git clone or extract the compressed file to your desired directory    
+2. 
+
 
 ## Usage
 
