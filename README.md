@@ -14,10 +14,12 @@ It was developed with [Cloud9](https://c9.io/) and running on [Debian](http://be
 
 ## Deploy
 
-1. Git clone or extract the compressed file to your desired directory    
-2. Change the value of **TPATH** in the following line into your desired directory in `alias.sh`:     
-`export TPATH=/var/lib/cloud9/coding_interview_testbed/`
-3. Execute `cat alias.sh >> ~/.bash_aliases` to add shortcuts to your environment. And ensure `~/.bash_aliases` loaded by `~/.bashrc` successfully or add the following lines to `~/.bashrc`:
+* Git clone or extract the compressed file to your desired directory    
+* Change the value of **TPATH** in the following line into your desired directory in `alias.sh`:
+```bash
+export TPATH=/var/lib/cloud9/coding_interview_testbed/
+```
+* Execute `cat alias.sh >> ~/.bash_aliases` to add shortcuts to your environment. And ensure `~/.bash_aliases` loaded by `~/.bashrc` successfully or add the following lines to `~/.bashrc`:
 ```bash
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
