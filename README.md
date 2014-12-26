@@ -7,24 +7,25 @@ It was developed with [Cloud9](https://c9.io/) and running on [Debian](http://be
 
 
 ## Features
-* Test case generator     
-* Batch test      
-* Common shortcuts / aliases      
+* Test case generator
+* Batch test
+* Common shortcuts / aliases
 
 
 ## Deploy
 
-* Git clone or extract the compressed file to your desired directory    
+* Git clone or extract the compressed file to your desired directory
 * Change the value of **TPATH** in the following line into your desired directory in `alias.sh`:
 ```bash
 export TPATH=/var/lib/cloud9/coding_interview_testbed/
 ```
-* Execute `cat alias.sh >> ~/.bash_aliases` to add shortcuts to your environment. And ensure `~/.bash_aliases` loaded by `~/.bashrc` successfully or add the following lines to `~/.bashrc`:
+* Execute `cat alias.sh >> ~/.bash_aliases` to add shortcuts to your environment. And ensure `~/.bash_aliases` can be loaded by `~/.bashrc` successfully or add the following lines to `~/.bashrc`:
 ```bash
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 ```
+* Relogin the session to load the `~/.bash_aliases`     
 * Modify the two following lines in `test.sh` if your compiler is other than **gcc**:
 ```bash
 compiler=gcc
