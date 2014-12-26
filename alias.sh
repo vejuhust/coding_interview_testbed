@@ -16,6 +16,10 @@ function pause(){
 }
 
 function mcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+function mcdc() {
     mkdir -p "$1" && cd "$1" && touch "${1##*/}.c"
 }
 
