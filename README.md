@@ -15,7 +15,7 @@ It was developed with [Cloud9](https://c9.io/) and running on [Debian](http://be
 ## Deploy
 
 1. Git clone or extract the compressed file to your desired directory    
-2. Modify the value of **TPATH** in the following line to your desired directory in `alias.sh`:     
+2. Change the value of **TPATH** in the following line into your desired directory in `alias.sh`:     
 ```bash
 export TPATH=/var/lib/cloud9/coding_interview_testbed/
 ```
