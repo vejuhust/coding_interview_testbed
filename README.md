@@ -25,6 +25,12 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 ```
+* Modify the two following lines in `test.sh` if your compiler is other than **gcc**:
+```bash
+compiler=gcc
+eval "$time_count" "$compiler" *.c -std=c99 -Wall -Wextra -o "$fileexe"
+```
+
 
 
 ## Usage
