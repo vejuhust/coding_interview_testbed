@@ -55,4 +55,4 @@ function tpush() {
 }
 
 
-#cat alias.sh > ~/.bash_aliases
+# cat alias.sh > ~/.bash_aliases
