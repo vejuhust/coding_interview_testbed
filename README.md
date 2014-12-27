@@ -32,6 +32,11 @@ fi
 compiler=gcc
 eval "$time_count" "$compiler" *.c -std=c99 -Wall -Wextra -o "$fileexe"
 ```
+* If you're using languages like Java or Python, you may also need to modify these lines:
+```bash
+eval "$time_count" "$fileexe"
+result=$(eval "$time_count" "$fileexe")
+```
 
 
 ## Usage
