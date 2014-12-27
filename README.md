@@ -35,6 +35,7 @@ cp -f"$verbose" *.c "$dirtest"
 ```
 * If you're using languages like Java or Python, you may also need to adjust these lines:
 ```bash
+fileexe="$dirtest"a.out
 eval "$time_count" "$fileexe"
 result=$(eval "$time_count" "$fileexe")
 ```
@@ -47,5 +48,4 @@ result=$(eval "$time_count" "$fileexe")
 ### Create test cases
 
 ### Run test cases
-
 
