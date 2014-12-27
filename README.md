@@ -27,12 +27,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 ```
 * Relogin the session to load the `~/.bash_aliases`     
-* Modify the two following lines in `test.sh` if your desired compiler is other than **gcc**:
+* Modify the following lines in `test.sh` if your desired compiler is other than **gcc**:
 ```bash
 compiler=gcc
 eval "$time_count" "$compiler" *.c -std=c99 -Wall -Wextra -o "$fileexe"
+cp -f"$verbose" *.c "$dirtest"
 ```
-* If you're using languages like Java or Python, you may also need to modify these lines:
+* If you're using languages like Java or Python, you may also need to adjust these lines:
 ```bash
 eval "$time_count" "$fileexe"
 result=$(eval "$time_count" "$fileexe")
