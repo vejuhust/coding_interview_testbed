@@ -44,6 +44,7 @@ result=$(eval "$time_count" "$fileexe")
 ## Usage
 
 ### Start a new project
+A new project should be put in a folder with unique name in that directory.
 
 ### Create test cases
 
