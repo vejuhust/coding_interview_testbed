@@ -44,7 +44,8 @@ result=$(eval "$time_count" "$fileexe")
 ## Usage
 
 ### Start a new project
-A new project should be put in a folder with unique name in **TPATH** directory.
+A new project should be put in a folder with unique name in **TPATH** directory. Shortcuts `mcd` and `mcdc` can help you with that.    
+
 
 ### Create test cases
 
