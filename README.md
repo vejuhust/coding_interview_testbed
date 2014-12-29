@@ -71,6 +71,8 @@ Thus a typical project may look like this:
     └── unique_char.c
 ```
 
+### Write codes
+
 ### Create test cases
 
 ### Run test cases
