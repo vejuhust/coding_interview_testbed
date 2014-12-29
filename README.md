@@ -47,7 +47,29 @@ result=$(eval "$time_count" "$fileexe")
 A new project should be put in a folder with unique name in **TPATH** directory. Shortcuts `mcd` and `mcdc` can help you with that.    
 A source code file with extension (default **.c**) is a must for every project. Apart from source code file, input/output data should be placed in the same folder. Without input/output data, it will only be tested once.
 Thus a typical project may look like this:     
-
+```
+└── unique_char
+    ├── input
+    │   ├── input01.txt
+    │   ├── input02.txt
+    │   ├── input03.txt
+    │   ├── input04.txt
+    │   ├── input05.txt
+    │   ├── input06.txt
+    │   ├── input07.txt
+    │   └── input08.txt
+    ├── output
+    │   ├── output01.txt
+    │   ├── output02.txt
+    │   ├── output03.txt
+    │   ├── output04.txt
+    │   ├── output05.txt
+    │   ├── output06.txt
+    │   ├── output07.txt
+    │   └── output08.txt
+    ├── raw.txt
+    └── unique_char.c
+```
 
 ### Create test cases
 

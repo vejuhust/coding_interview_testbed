@@ -1,0 +1,61 @@
+.
+├── reserve_sentence
+│   ├── input
+│   │   ├── input01.txt
+│   │   ├── input02.txt
+│   │   ├── input03.txt
+│   │   ├── input04.txt
+│   │   ├── input05.txt
+│   │   ├── input06.txt
+│   │   ├── input07.txt
+│   │   ├── input08.txt
+│   │   ├── input09.txt
+│   │   ├── input10.txt
+│   │   ├── input11.txt
+│   │   ├── input12.txt
+│   │   ├── input13.txt
+│   │   ├── input14.txt
+│   │   ├── input15.txt
+│   │   └── input16.txt
+│   ├── output
+│   │   ├── output01.txt
+│   │   ├── output02.txt
+│   │   ├── output03.txt
+│   │   ├── output04.txt
+│   │   ├── output05.txt
+│   │   ├── output06.txt
+│   │   ├── output07.txt
+│   │   ├── output08.txt
+│   │   ├── output09.txt
+│   │   ├── output10.txt
+│   │   ├── output11.txt
+│   │   ├── output12.txt
+│   │   ├── output13.txt
+│   │   ├── output14.txt
+│   │   ├── output15.txt
+│   │   └── output16.txt
+│   ├── raw.txt
+│   └── reserve_sentence.c
+└── unique_char
+    ├── input
+    │   ├── input01.txt
+    │   ├── input02.txt
+    │   ├── input03.txt
+    │   ├── input04.txt
+    │   ├── input05.txt
+    │   ├── input06.txt
+    │   ├── input07.txt
+    │   └── input08.txt
+    ├── output
+    │   ├── output01.txt
+    │   ├── output02.txt
+    │   ├── output03.txt
+    │   ├── output04.txt
+    │   ├── output05.txt
+    │   ├── output06.txt
+    │   ├── output07.txt
+    │   └── output08.txt
+    ├── raw.txt
+    └── unique_char.c
+
+6 directories, 52 files
