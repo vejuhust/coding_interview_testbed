@@ -43,7 +43,7 @@ result=$(eval "$time_count" "$fileexe")
 
 ## Usage
 
-### Start a new project
+### Start new projects
 A new project should be put in a folder with unique name in **TPATH** directory. Shortcuts `mcd` and `mcdc` can help you with that.    
 A source code file with extension (default **.c**) is a must for every project. Apart from source code file, input/output data should be placed in the same folder. Without input/output data, it will only be tested once.     
 Thus a typical project may look like this:     
