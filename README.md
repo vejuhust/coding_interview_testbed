@@ -72,6 +72,8 @@ Thus a typical project may look like this:
 ```
 
 ### Write codes
+You can use `tcd` as shortcut to switch to the project folder quickly.     
+Your program should meet the two requirements:    
 
 ### Create test cases
 
