@@ -73,7 +73,10 @@ Thus a typical project may look like this:
 
 ### Write codes
 You can use `tcd` as shortcut to switch to the project folder quickly.     
-Your program should meet the two requirements:    
+Your program should meet the following requirements:    
+* Set exit code 0 if succeeded, non-zero for errors
+* Read input data from `input.txt` if applicable
+* Write output data to `output.txt` if applicable
 
 ### Create test cases
 
