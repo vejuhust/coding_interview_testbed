@@ -79,7 +79,25 @@ Your program should meet the following requirements:
 * Write output data to `output.txt` if applicable
 
 ### Create test cases
-`generator.py` is a tool to help you create test cases from single text file.
+`generator.py` is a tool to help you create test cases from single text file.       
+For example, execute `python generator.py raw.txt` with the following `raw.txt`:        
+```
+[INPUT]
+apple
+[OUTPUT]
+APPLE
+
+[INPUT]
+banana
+[OUTPUT]
+BANANA
+
+[INPUT]
+coconut
+[OUTPUT]
+COCONUT
+```
+
 
 ### Run test cases
 
