@@ -104,7 +104,9 @@ Three input data files and three output data files will be created:
 | input01.txt    | apple            |
 | input02.txt    | banana           |
 | input03.txt    | coconut          |
-
+| output01.txt   | APPLE            |
+| output02.txt   | BANANA           |
+| output03.txt   | COCONUT          |
 
 
 ### Run test cases
