@@ -80,7 +80,7 @@ Your program should meet the following requirements:
 
 ### Create test cases
 `generator.py` is a tool to help you create test cases from single text file.       
-For example, execute `python generator.py raw.txt` with the following `raw.txt`:        
+For example, execute `python generator.py raw.txt` with the following text file raw.txt:        
 ```
 [INPUT]
 apple
@@ -97,6 +97,7 @@ coconut
 [OUTPUT]
 COCONUT
 ```
+Three input data files and three output data files will be created:         
 
 
 ### Run test cases
