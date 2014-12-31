@@ -79,6 +79,7 @@ Your program should meet the following requirements:
 * Write output data to `output.txt` if applicable
 
 ### Create test cases
+`generator.py` is a tool to help you create test cases from single text file.
 
 ### Run test cases
 
