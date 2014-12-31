@@ -97,7 +97,14 @@ coconut
 [OUTPUT]
 COCONUT
 ```
-Three input data files and three output data files will be created:         
+Three input data files and three output data files will be created:       
+
+| Filename       | Content          |
+| :------------- | :--------------- | 
+| input01.txt    | apple            |
+| input02.txt    | banana           |
+| input03.txt    | coconut          |
+
 
 
 ### Run test cases
