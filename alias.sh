@@ -8,6 +8,8 @@ alias ......='cd ../../../../../'
 alias ls='ls --color=tty --classify $*'
 alias ll='ls -lhA'
 
+alias upgrade='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y'
+
 export TPATH=/var/lib/cloud9/coding_interview_testbed/
 export TZ='Asia/Shanghai'
 
